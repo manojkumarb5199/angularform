@@ -1,0 +1,57 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h2>ActorProject</h2>
+        <div>
+         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="hidebutton()" >Add Actors</button>
+        </div>
+        </div>
+</nav>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">ActorId</th>
+            <th scope="col">Name</th>
+            <th scope="col">Movies</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let value of actordata">
+            <td>{{value.id}}</td>
+            <td>{{value.name}}</td>
+            <td>{{value.movies}}</td>
+            <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(value)">edit</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="del(value)">delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actors Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="actordetails">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Actor Name</label>
+                  <input type="text" class="form-control" formControlName="name" id="name">
+                  <span class="text-danger" *ngIf="!actordetails.controls['name'].valid && actordetails.controls['name'].touched">Please enter the number</span>
+                </div>
+                <div class="mb-3">
+                  <label for="movies" class="form-label">Movies</label>
+                  <input type="number" class="form-control" formControlName="movies" id="movies">
+                </div>
+            </form>    
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" *ngIf="showupdate" (click)="update()">update</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" *ngIf="showsubmit" (click)="post()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
